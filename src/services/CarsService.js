@@ -1,7 +1,7 @@
 import axios from "axios";
+import AddCar from "../components/AddCar";
 
 class CarsService {
-    cars = []
 
     constructor() {
         this.httpClient = axios.create({
@@ -24,6 +24,18 @@ class CarsService {
             .then(res => res.data)
             .catch(err => console.log(err))
     }
+
+    get(id) {
+       let carForEdit =  axios.get(`http://localhost:3000/api/cars/${id}`)
+        .then(res => res.data)
+        .catch(err => err)
+    }
+
+    // edit(id, car) {
+    //     this.httpClient.put(`/api/cars/${id}`, car)
+    //     .then(res => res.data)
+    //     .catch(err => console.log(err))
+    // }
 }
 
 export default new CarsService()

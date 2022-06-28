@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import CarsService from '../services/CarsService'
 
 const AppCars = () => {
@@ -22,7 +23,7 @@ const AppCars = () => {
   return (
         <ul>
             { cars.map((car) => (
-                <ul key={car.id}>
+                <ul key={car.id} style={{ "marginBottom": "1rem" }}>
                     <li>Brand: {car.brand}</li>
                     <li>Model: {car.model}</li>
                     <li>Year: {car.year}</li>
@@ -30,6 +31,7 @@ const AppCars = () => {
                     <li>Automatic: {car.isAutomatic}</li>
                     <li>Engine: {car.engine}</li>
                     <li>Dors: {car.numberOfDoors}</li>
+                    <li> <Link to={`/edit/${car.id}`} id={car.id} className='btn btn-warning btn-sm'>Edit</Link> </li>
                 </ul>
             )) }
         </ul>
