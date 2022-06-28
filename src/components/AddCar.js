@@ -18,6 +18,7 @@ const AddCar = () => {
     }
 
     const handleBrand = (e) => {
+        
        setBrand(e.target.value);
     }
 
@@ -62,6 +63,14 @@ const AddCar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // if(brand.split('').length < 2) {
+        //     alert('Brand field must have 2 or more characters')
+        // }
+
+        // if(model.split('').length < 2) {
+        //     alert('Model field must have 2 or more characters')
+        // }
+
         CarsService.add({
             brand: brand,
             model: model,
@@ -83,19 +92,19 @@ const AddCar = () => {
             <div className="col-8">
                 <h1>Add new Car</h1><br />
                 <form onSubmit={handleSubmit}>
-                    <input onChange={(e) => handleBrand(e)} type="text" name='brand' placeholder='brand' className="form-control" /><br />
-                    <input onChange={(e) => handleModel(e)} type="text" name='model' placeholder='model' className="form-control"  /><br />
+                    <input required minLength={2} onChange={(e) => handleBrand(e)} type="text" name='brand' placeholder='brand' className="form-control" /><br />
+                    <input required minLength={2} onChange={(e) => handleModel(e)} type="text" name='model' placeholder='model' className="form-control"  /><br />
                     <label htmlFor="year">Year: </label><select required onChange={(e) => handleYear(e)} className='form-control' name="year" id="year">
                         { years.map((year, index) => (
                             <option key={index} className="form-control">{year}</option>
                         )) }
                     </select><br />
                     <input onChange={(e) => handleMaxSpeed(e)}  type="number" name='maxSpeed' placeholder='max speed' className="form-control" /><br />
-                    <input onChange={(e) => handleNumberOfDoors(e)}  type="number" name='numberOfDoors' placeholder='number of doors' className="form-control" /><br />
+                    <input required onChange={(e) => handleNumberOfDoors(e)}  type="number" name='numberOfDoors' placeholder='number of doors' className="form-control" /><br />
                     <label htmlFor="isAutomatic">Is automatic gear box?</label><input onChange={(e) => handleIsAutomatic(e)} type="checkbox" name='isAutomatic' id='isAutomatic' /><br /><br />
                     <label>Engine?</label><select onChange={handleEngine} name="engine" className='form-control'>
                         {engines.map((engine, index) => (
-                            <option key={index} className='form-control' value={engine}>{engine}</option>
+                            <option required key={index} className='form-control' value={engine}>{engine}</option>
                             ))}
                     </select><br />
                     <button type="submit" className="btn btn-success btn-sm">Add</button>
