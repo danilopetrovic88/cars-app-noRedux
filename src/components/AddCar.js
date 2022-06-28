@@ -11,7 +11,7 @@ const AddCar = () => {
     const [numberOfDoors, setNumberOfDoors] = useState('')
     const [isAutomatic, setIsAutomatic] = useState(false)
     const [engine, setEngine] = useState(engines[0])
-    // const [newCar, setNewCar] = useState(null)
+    const [newCar, setNewCar] = useState(null)
 
     for (let i = 0; i <= 28; i++) {
         years.push(i + 1990)
@@ -45,6 +45,18 @@ const AddCar = () => {
 
     const handleEngine = (e) => {
         setEngine(e.target.value)
+    }
+
+    const handlePreview = () => {
+        alert(JSON.stringify({
+            brand: brand,
+            model: model,
+            year: year,
+            maxSpeed: maxSpeed,
+            numberOfDors: numberOfDoors,
+            isAutomatic: isAutomatic,
+            engine: engine
+        }))
     }
 
     const handleSubmit = (e) => {
@@ -88,6 +100,7 @@ const AddCar = () => {
                     </select><br />
                     <button type="submit" className="btn btn-success btn-sm">Add</button>
                     <button type="reset" className="btn btn-danger btn-sm">Reset</button>
+                    <button type='button' onClick={() => handlePreview()} className="btn btn-info btn-sm">Preview</button>
                 </form>
             </div>
         </div>
