@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppCars from './components/AppCars';
+import AppCars from './pages/AppCars';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Link } from 'react-router-dom';
 import AddCar from './components/AddCar';

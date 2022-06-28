@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom';
 import CarsService from '../services/CarsService';
 
 const AddCar = () => {
@@ -12,6 +13,8 @@ const AddCar = () => {
     const [isAutomatic, setIsAutomatic] = useState(false)
     const [engine, setEngine] = useState(engines[0])
     const [newCar, setNewCar] = useState(null)
+
+    let history = useHistory();
 
     for (let i = 0; i <= 28; i++) {
         years.push(i + 1990)
@@ -80,6 +83,8 @@ const AddCar = () => {
             isAutomatic: isAutomatic,
             engine: engine
         })
+
+        history.push('/cars')        
     }
 
     if(year === undefined) {

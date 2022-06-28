@@ -20,7 +20,9 @@ class CarsService {
     }
     
     add(car) {
-        console.log(car); // Treba da zavrsim ovo kako je navedeno u zadatku
+        axios.post('http://localhost:3000/api/cars', car)
+            .then(res => res.data)
+            .catch(err => console.log(err))
     }
 }
 
