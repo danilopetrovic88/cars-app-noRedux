@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AppCars from './components/AppCars';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Link } from 'react-router-dom';
+import AddCar from './components/AddCar';
 
 function App() {
   return (
@@ -16,12 +17,18 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to={'/cars'}>Cars</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={'/add'}>Add car</Link>
+              </li>
             </ul>
           </div>
         </nav>
         <Switch>
           <Route path={'/cars'}>
             <AppCars  />
+          </Route>
+          <Route path={'/add'}>
+            <AddCar  />
           </Route>
         </Switch>
       </Router>
