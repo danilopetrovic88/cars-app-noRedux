@@ -87,6 +87,7 @@ const AddCar = () => {
                             ))}
                     </select><br />
                     <button type="submit" className="btn btn-success btn-sm">Add</button>
+                    <button type="reset" className="btn btn-danger btn-sm">Reset</button>
                 </form>
             </div>
         </div>
