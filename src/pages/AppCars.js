@@ -30,8 +30,9 @@ const AppCars = () => {
                     <li>MaxSpeed: {car.maxSpeed}</li>
                     <li>Automatic: {car.isAutomatic}</li>
                     <li>Engine: {car.engine}</li>
-                    <li>Dors: {car.numberOfDoors}</li>
+                    <li>Dors: {car.number_of_doors}</li>
                     <li> <Link to={`/edit/${car.id}`} id={car.id} className='btn btn-warning btn-sm'>Edit</Link> </li>
+                    <li> <Link to={`/cars/${car.id}`} id={car.id} className='btn btn-warning btn-sm'>See this car</Link> </li>
                 </ul>
             )) : 'No cars to show' }
         </ul>

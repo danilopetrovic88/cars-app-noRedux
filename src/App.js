@@ -8,6 +8,7 @@ import AppLogin from './components/AppLogin';
 import AppRegister from './components/AppRegister';
 import { useState } from 'react';
 import authService from './services/AuthService';
+import SingleCar from './components/SingleCar';
 
 function App() {
   const [authenticated, setAuthincated] = useState(!!localStorage.getItem('token'))
@@ -66,6 +67,9 @@ function App() {
           </Route>
           <Route exact path={'/register'}>
             <AppRegister onRegister={() => setAuthincated(true)} />
+          </Route>
+          <Route exact path={'/cars/:id'}>
+            <SingleCar />
           </Route>
         </Switch>
       </Router>
