@@ -24,13 +24,13 @@ function App() {
           </div>
         </nav>
         <Switch>
-          <Route path={'/cars'}>
+          <Route exact path={'/cars'}>
             <AppCars  />
           </Route>
-          <Route path={'/add'}>
+          <Route exact path={'/add'}>
             <AddCar  />
           </Route>
-          <Route path={'/edit/:id'}>
+          <Route exact path={'/edit/:id'}>
             <AddCar />
           </Route>
         </Switch>

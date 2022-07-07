@@ -9,9 +9,9 @@ const AppCars = () => {
         async function getCars() {
     
           try {
-            const cars = await CarsService.getAll()
+            const {data} = await CarsService.getAll()
             
-            setCars(cars)
+            setCars(data)
           } catch (error) {
             console.log(error)
           }
@@ -22,7 +22,7 @@ const AppCars = () => {
 
   return (
         <ul>
-            { cars.map((car) => (
+            { cars && cars.length > 0 ? cars.map((car) => (
                 <ul key={car.id} style={{ "marginBottom": "1rem" }}>
                     <li>Brand: {car.brand}</li>
                     <li>Model: {car.model}</li>
@@ -33,7 +33,7 @@ const AppCars = () => {
                     <li>Dors: {car.numberOfDoors}</li>
                     <li> <Link to={`/edit/${car.id}`} id={car.id} className='btn btn-warning btn-sm'>Edit</Link> </li>
                 </ul>
-            )) }
+            )) : 'No cars to show' }
         </ul>
   )
 }

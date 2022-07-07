@@ -1,41 +1,71 @@
-import axios from "axios";
-import AddCar from "../components/AddCar";
+import axios from 'axios';
 
-class CarsService {
+class CarService {
+  constructor() {
+    this.client = axios.create({
+      baseURL: 'http://localhost:8000/api',
+    });
+  }
 
-    constructor() {
-        this.httpClient = axios.create({
-            baseURL: 'http://localhost:3000'
-        })
+  async getAll() {
+    try {
+      const { data } = await this.client.get('cars');
 
+      return data;
+    } catch (error) {
+      console.log(error);
     }
 
-    async getAll() {
-        try {
-            const {data} = await this.httpClient.get('/api/cars')
-            return data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    
-    add(car) {
-        axios.post('http://localhost:3000/api/cars', car)
-            .then(res => res.data)
-            .catch(err => console.log(err))
+    return [];
+  }
+
+  async add(newCar) {
+    try {
+      const { data } = await this.client.post('cars', newCar);
+
+      return data;
+    } catch (error) {
+      console.log(error);
     }
 
-    get(id) {
-       let carForEdit =  axios.get(`http://localhost:3000/api/cars/${id}`)
-        .then(res => res.data)
-        .catch(err => err)
+    return null;
+  }
+
+  async delete(carId) {
+    try {
+      const { data } = await this.client.delete(`cars/${carId}`);
+
+      return data;
+    } catch (error) {
+      console.log(error);
     }
 
-    // edit(id, car) {
-    //     this.httpClient.put(`/api/cars/${id}`, car)
-    //     .then(res => res.data)
-    //     .catch(err => console.log(err))
-    // }
+    return {};
+  }
+
+  async get(id) {
+    try {
+      const { data } = await this.client.get(`cars/${id}`);
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return {};
+  }
+
+  async edit(id, newCar) {
+    try {
+      const { data } = await this.client.put(`cars/${id}`, newCar);
+
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return null;
+  }
 }
 
-export default new CarsService()
+export default new CarService();
