@@ -5,10 +5,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Link } from 'react-router-dom';
 import AddCar from './components/AddCar';
 import AppLogin from './components/AppLogin';
+import AppRegister from './components/AppRegister';
 import { useState } from 'react';
+import authService from './services/AuthService';
 
 function App() {
   const [authenticated, setAuthincated] = useState(!!localStorage.getItem('token'))
+
+  const handleLogout = () => {
+    authService.logout();
+    setAuthincated(false);
+  }
 
   return (
     <div>
@@ -24,13 +31,21 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to={'/add'}>Add car</Link>
               </li>
-              { !authenticated ? 
+              { !authenticated &&
               <li className="nav-item">
                 <Link className="nav-link" to={'/login'}>Login</Link>
               </li> 
-              : 
+              }
+
+              { !authenticated &&
               <li className="nav-item">
-                <p className='nav-link'>Logout</p>
+                <Link className="nav-link" to={'/register'}>Register</Link>
+              </li> 
+              }
+
+              { authenticated &&
+              <li className="nav-item">
+                <p onClick={handleLogout} className='nav-link'>Logout</p>
               </li>
               }
             </ul>
@@ -47,7 +62,10 @@ function App() {
             <AddCar />
           </Route>
           <Route exact path={'/login'}>
-            <AppLogin />
+            <AppLogin onLogin={() => setAuthincated(true)} />
+          </Route>
+          <Route exact path={'/register'}>
+            <AppRegister onRegister={() => setAuthincated(true)} />
           </Route>
         </Switch>
       </Router>

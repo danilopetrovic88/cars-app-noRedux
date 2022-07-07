@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import authService from "../services/AuthService"
 
-const AppLogin = ({onLogin}) => {
+const AppRegister = ({onRegister}) => {
   const [credentials, setCredentials] = useState({
+    name: '',
     email: '',
     password: ''
   });
@@ -14,9 +15,9 @@ const AppLogin = ({onLogin}) => {
     e.preventDefault();
 
     try {
-      authService.login(credentials);
-      onLogin();
-      history.push('/cars')
+      authService.register(credentials);
+      history.push('/login')
+      onRegister();
     } catch (error) {
       alert(error)
     }
@@ -26,8 +27,15 @@ const AppLogin = ({onLogin}) => {
     <div className='container'>
       <div className='row'>
         <div className='col-8'>
-          <h3>Login Form</h3>
+          <h3>Register Form</h3>
           <form onSubmit={handleSubmit}>
+          <input 
+            className='form-control' 
+            placeholder='name' 
+            type='text' 
+            name='name' 
+            onChange={(({target} )=> setCredentials({...credentials, name: target.value}))}
+            /><br />
             <input 
             className='form-control' 
             placeholder='email' 
@@ -42,7 +50,7 @@ const AppLogin = ({onLogin}) => {
             name='password' 
             onChange={(({target} )=> setCredentials({...credentials, password: target.value}))}
             /><br />
-            <button className='btn btn-success btn-sm'>Login</button>
+            <button className='btn btn-warning btn-sm'>Register</button>
           </form>
         </div>
       </div>
@@ -50,4 +58,4 @@ const AppLogin = ({onLogin}) => {
   )
 }
 
-export default AppLogin
+export default AppRegister
