@@ -15,8 +15,8 @@ const AppLogin = ({onLogin}) => {
 
     try {
       authService.login(credentials);
-      onLogin();
       history.push('/cars')
+      onLogin();
     } catch (error) {
       alert(error)
     }

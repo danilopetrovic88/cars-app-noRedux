@@ -9,6 +9,8 @@ import AppRegister from './components/AppRegister';
 import { useState } from 'react';
 import authService from './services/AuthService';
 import SingleCar from './components/SingleCar';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 function App() {
   const [authenticated, setAuthincated] = useState(!!localStorage.getItem('token'))
@@ -53,21 +55,21 @@ function App() {
           </div>
         </nav>
         <Switch>
-          <Route exact path={'/cars'}>
+          <PrivateRoute exact path={'/cars'}>
             <AppCars  />
-          </Route>
-          <Route exact path={'/add'}>
+          </PrivateRoute>
+          <PrivateRoute exact path={'/add'}>
             <AddCar  />
-          </Route>
-          <Route exact path={'/edit/:id'}>
+          </PrivateRoute>
+          <PrivateRoute exact path={'/edit/:id'}>
             <AddCar />
-          </Route>
-          <Route exact path={'/login'}>
+          </PrivateRoute>
+          <PublicRoute exact path={'/login'}>
             <AppLogin onLogin={() => setAuthincated(true)} />
-          </Route>
-          <Route exact path={'/register'}>
+          </PublicRoute>
+          <PublicRoute exact path={'/register'}>
             <AppRegister onRegister={() => setAuthincated(true)} />
-          </Route>
+          </PublicRoute>
           <Route exact path={'/cars/:id'}>
             <SingleCar />
           </Route>

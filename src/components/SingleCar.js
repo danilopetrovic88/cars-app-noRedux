@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import CarsService from '../services/CarsService';
@@ -18,6 +19,10 @@ const SingleCar = () => {
         }
 
     }, [id]);
+
+    if(!car) {
+        <Redirect to={'/cars'} />
+    }
   return (
     <div className='container'>
         <h2>Single Car Page</h2>
