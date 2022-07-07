@@ -4,8 +4,12 @@ import AppCars from './pages/AppCars';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { Link } from 'react-router-dom';
 import AddCar from './components/AddCar';
+import AppLogin from './components/AppLogin';
+import { useState } from 'react';
 
 function App() {
+  const [authenticated, setAuthincated] = useState(!!localStorage.getItem('token'))
+
   return (
     <div>
       
@@ -20,6 +24,15 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to={'/add'}>Add car</Link>
               </li>
+              { !authenticated ? 
+              <li className="nav-item">
+                <Link className="nav-link" to={'/login'}>Login</Link>
+              </li> 
+              : 
+              <li className="nav-item">
+                <p className='nav-link'>Logout</p>
+              </li>
+              }
             </ul>
           </div>
         </nav>
@@ -32,6 +45,9 @@ function App() {
           </Route>
           <Route exact path={'/edit/:id'}>
             <AddCar />
+          </Route>
+          <Route exact path={'/login'}>
+            <AppLogin />
           </Route>
         </Switch>
       </Router>
